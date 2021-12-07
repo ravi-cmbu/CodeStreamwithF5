@@ -1,0 +1,41 @@
+---
+project: IndiaLabs
+kind: PIPELINE
+name: RK_F5_Get_Token
+icon: organization,left, is-warm-grey
+enabled: true
+description: Login and get the token
+concurrency: 10
+output:
+  token: ${Stage0.getToken.output.responseJson.token.token}
+workspace:
+  type: DOCKER
+  endpoint: ''
+  image: ''
+  registry: ''
+  path: ''
+  autoCloneForTrigger: false
+  limits:
+    memory: 512
+    cpu: 1.0
+stageOrder:
+- Stage0
+stages:
+  Stage0:
+    taskOrder:
+    - getToken
+    tasks:
+      getToken:
+        type: REST
+        input:
+          action: post
+          url: https://172.16.40.16/mgmt/shared/authn/login
+          headers:
+            Accept: application/json
+            Content-Type: application/json
+          payload: |-
+            {
+              "username":"admin",
+              "password":"VMware1!VMware1!",
+              "loginProviderName":"tmos"
+            }
