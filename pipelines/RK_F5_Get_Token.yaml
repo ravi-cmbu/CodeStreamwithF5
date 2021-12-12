@@ -35,7 +35,7 @@ stages:
             Content-Type: application/json
           payload: |-
             {
-              "username":"admin",
-              "password":"VMware1!VMware1!",
+              "username":"adminusername",
+              "password":"xxpasswordxx",
               "loginProviderName":"tmos"
             }
